@@ -1,0 +1,9 @@
+{
+    "name": "victor.neves/backend",
+    "autoload": {
+        "psr-4": {
+            "VictorNeves\\Backend\\": "src/"
+        }
+    },
+    "require": {}
+}
