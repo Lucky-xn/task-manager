@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-screen flex items-center justify-center text-sm">
     <form
-      class="flex flex-col justify-between py-3 items-center shadow-2xl border border-neutral-700 rounded-md p-3 w-[20rem] h-[17rem]"
+      class="flex flex-col justify-between py-3 items-center shadow-2xl border border-neutral-700 rounded-md p-3 w-[30rem] h-[17rem]"
     >
       <div class="w-full flex flex-col gap-2">
         <span class="text-xl font-semibold py-4 flex items-center justify-center"
@@ -15,7 +15,7 @@
             v-model="email"
             placeholder="youremail@example.com"
             required
-            class="border border-neutral-700 rounded-md bg-neutral-700 px-2 py-1"
+            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
             :class="{'border-red-500/50': email && !emailRegex()}"
           />
         </div>
@@ -28,7 +28,7 @@
             id="password"
             v-model="password"
             required
-            class="border border-neutral-700 rounded-md bg-neutral-700 px-2 py-1"
+            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
           />
         </div>
         <div class="text-xs flex gap-2 py-2">
@@ -40,12 +40,14 @@
       </div>
 
       <div class="flex gap-5">
-        <button
+        <router-link
+          to="/register"
           class="hover:bg-blue-500/10 text-white rounded-xl px-4 py-1 transition-all duration-500 cursor-pointer"
         >
           Create Account
-        </button>
+        </router-link>
         <button
+          type="submit"
           class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-8 py-1 transition-all duration-500 cursor-pointer"
         >
           Login
