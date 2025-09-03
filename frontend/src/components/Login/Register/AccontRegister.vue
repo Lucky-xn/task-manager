@@ -2,7 +2,7 @@
   <div class="w-full h-screen flex items-center justify-center text-sm">
     <form
       @submit.prevent="createNewUser"
-      class="flex flex-col justify-between py-3 items-center shadow-2xl border border-neutral-700 rounded-md p-3 w-[30rem] h-[18rem]"
+      class="flex flex-col justify-between py-3 items-center shadow-indigo-700/20 shadow-2xl border border-neutral-700 rounded-md p-3 w-[30rem] h-[20rem]"
     >
       <div class="w-full flex flex-col gap-2">
         <span class="text-xl font-semibold py-4 flex items-center justify-center"
@@ -19,7 +19,7 @@
               v-model="first_name"
               placeholder="Leon"
               required
-              class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
+              class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-800 px-2 py-1"
             />
           </div>
           <div class="flex flex-1 flex-col">
@@ -32,7 +32,7 @@
               v-model="last_name"
               placeholder="Kennedy"
               required
-              class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
+              class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-800 px-2 py-1"
             />
           </div>
         </div>
@@ -44,11 +44,11 @@
             v-model="email"
             placeholder="youremail@example.com"
             required
-            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
+            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-800 px-2 py-1"
             :class="{ 'border-red-500/50': email && !emailRegex() }"
           />
         </div>
-        <div class="flex flex-col">
+        <div class="relative flex flex-col">
           <label for="password" class="text-xs text-gray-500 font-semibold"
             >Password:</label
           >
@@ -58,18 +58,23 @@
             v-model="password"
             placeholder="********"
             required
-            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-700 px-2 py-1"
+            class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-800 px-2 py-1"
           />
+          <Icon icon="solar:eye-bold-duotone" class="h-5 w-5 text-white absolute right-2 top-8 transform -translate-y-1/2" />
+          <Icon icon="solar:eye-closed-line-duotone" class="h-5 w-5 text-white absolute right-2 top-8 transform -translate-y-1/2" />
+        </div>
+        <div class="text-xs flex gap-2 py-0.5">
+          <span class="text-gray-500">You have an Account?</span>
+          <router-link to="/login" class="text-blue-500">Login here</router-link>
         </div>
       </div>
 
-
-        <button
-          type="submit"
-          class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-20 py-1 transition-all duration-500 cursor-pointer"
-        >
-          Register
-        </button>
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-20 py-1 transition-all duration-500 cursor-pointer"
+      >
+        Register
+      </button>
     </form>
   </div>
 </template>
@@ -99,7 +104,7 @@ const createNewUser = async () => {
   }
 
   await makeRequest({
-    type: 'register',
+    type: "register",
     first_name: first_name.value,
     last_name: last_name.value,
     email: email.value,
