@@ -6,13 +6,24 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+
+import { useRequest } from './services/useRequest';
 
 import NavBar from "./components/NavBar.vue";
 
 const route = useRoute();
 
+const { dados, makeRequest, loading } = useRequest('teste', 'POST'); 
 
 const url = computed(() => route.meta.type);
+
+
+onMounted(async () => {
+  await makeRequest({
+    teste: 'teste'
+  });
+})
+
 </script>

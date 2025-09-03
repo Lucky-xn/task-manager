@@ -1,6 +1,7 @@
 <template>
   <div class="w-full h-screen flex items-center justify-center text-sm">
     <form
+      @submit.prevent="login"
       class="flex flex-col justify-between py-3 items-center shadow-2xl border border-neutral-700 rounded-md p-3 w-[30rem] h-[17rem]"
     >
       <div class="w-full flex flex-col gap-2">
@@ -60,15 +61,29 @@
 <script setup>
 import { ref } from 'vue';
 
+import { useRequest } from '@/services/useRequest.js';
+
 const email = ref('');
 const password = ref('');
+
+const {dados, makeRequest, loading } = useRequest("user", "post");
 
 function emailRegex() {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email.value);
 }
 
-const login = () => {
-  // Handle login logic here
+const login = async () => {
+  try {
+    await makeRequest({
+      type: 'login',
+      email: email.value,
+      password: password.value
+    });
+
+    console.log(dados.value.token);
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>

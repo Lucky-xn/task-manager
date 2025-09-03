@@ -34,7 +34,7 @@ class Auth {
       return JWT::encode($payload, $this->secretKey, $this->algorithm);
    }
 
-   public function validateToken($token) {
+   public function verifyToken($token) {
    try {
       $decoded = JWT::decode($token, new \Firebase\JWT\Key($this->secretKey, $this->algorithm));
          return isset($decoded->data) ? (array)$decoded->data : [];

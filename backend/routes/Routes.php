@@ -1,9 +1,7 @@
 <?php
-
 use Config\SystemRouter;
-
 $router = new SystemRouter();
 
-$router->addRoute('GET', '/test', 'testFile');
+include_once __DIR__ . '/System/User.php';
 
 $router->run();

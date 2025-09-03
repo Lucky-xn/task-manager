@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use Services\Auth;
+
 /**
  * Classe responsável por gerenciar as rotas do sistema.
  * Permite adicionar rotas, obter todas as rotas e executar a rota correspondente à requisição.
@@ -16,7 +18,7 @@ class SystemRouter
 {
    private $routes = [];
 
-   public function addRoute($method, $request, $handler, $private = false, $permissions = [])
+   public function add($method, $request, $handler, $private = false, $permissions = [])
    {
       $controllerHandler = __DIR__ . '/../app/controllers/' . $handler . '.php';
 
@@ -26,7 +28,7 @@ class SystemRouter
 
       $this->routes[] = [
          'method' => $method,
-         'request' => $request,
+         'request' => '/' . $request,
          'handler' => $controllerHandler,
          'private' => $private,
          'permissions' => $permissions
@@ -39,9 +41,26 @@ class SystemRouter
       $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
       $requestPath = parse_url($requestUri, PHP_URL_PATH);
 
+      $auth = new Auth();
+
       foreach ($this->routes as $route) {
          if ($route['method'] === $requestMethod && $route['request'] === $requestPath) {
-            include_once $route['handler'];
+            if ($route['private'] && isset($requestUri['Authorization'])) {
+               $token = str_replace('Bearer ', '', $requestUri['Authorization']);
+               if (!$auth->verifyToken($token)) {
+                  http_response_code(403);
+                  echo json_encode(['error' => 'Forbidden']);
+                  return;
+               } else {
+                  include_once $route['handler'];
+               }
+            } else if ($route['private'] && !isset($requestUri['Authorization'])) {
+               http_response_code(401);
+               echo json_encode(['error' => 'Unauthorized']);
+               return;
+            } else {
+               include_once $route['handler'];
+            }
             return;
          }
       }

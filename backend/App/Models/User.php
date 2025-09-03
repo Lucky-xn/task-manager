@@ -8,26 +8,19 @@ use Services\Auth;
 class User extends MysqlModel
 {
 
-   public function createNewUser($first_name, $last_name, $email, $password)
+   public function createNewUser($data)
    {
       try {
          $sql = 'INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)';
 
          $params = [
-            ':first_name' => $first_name,
-            ':last_name' => $last_name,
-            ':email' => $email,
-            ':password' => password_hash($password, PASSWORD_BCRYPT)
+            ':first_name' => $data['first_name'],
+            ':last_name' => $data['last_name'],
+            ':email' => $data['email'],
+            ':password' => password_hash($data['password'], PASSWORD_BCRYPT)
          ];
 
          $this->executeQuery($sql, $params);
-
-         $data = [
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email
-         ];
-
          $auth = new Auth();
          return $auth->generateToken($data);
       } catch (\PDOException $e) {
@@ -35,17 +28,17 @@ class User extends MysqlModel
       }
    }
 
-   public function login($email, $password)
+   public function login($data)
    {
       try {
          $sql = 'SELECT first_name, last_name, email, password FROM users WHERE email = :email LIMIT 1';
-         $params = [':email' => $email];
+         $params = [':email' => $data['email']];
 
-         $data = $this->executeQuery($sql, $params);
-         if (!$data || count($data) === 0) {
+         $result = $this->executeQuery($sql, $params);
+         if (!$result || count($result) === 0) {
             throw new \Exception('User not found');
          }
-         return $this->authenticateUser($password, $data[0]['password'], $data[0]);
+         return $this->authenticateUser($data['password'], $result[0]['password'], $result[0]);
       } catch (\PDOException $e) {
          throw new \Exception("Error logging in: " . $e->getMessage());
       }
