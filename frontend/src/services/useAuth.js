@@ -5,7 +5,7 @@ const user = ref(null);
 
 const isTokenExpired = (token) => {
    try {
-      const {exp} = jwtDecode(token);
+      const { exp } = jwtDecode(token);
       if (!exp) return true;
       return Date.now() >= exp * 1000;
    } catch {
@@ -49,11 +49,11 @@ export function useAuth() {
       }
       try {
          const decoded = jwtDecode(token);
-         user.value = user.value = {
-        first_name: decoded.first_name,
-        last_name: decoded.last_name,
-        email: decoded.email
-      };
+         user.value = {
+            first_name: decoded.first_name,
+            last_name: decoded.last_name,
+            email: decoded.email
+         };
          return decoded;
       } catch (e) {
          console.error("Invalid token:", e);
@@ -61,7 +61,7 @@ export function useAuth() {
          return null;
       }
    }
-   
+
    loadUserFromToken();
 
    return {
