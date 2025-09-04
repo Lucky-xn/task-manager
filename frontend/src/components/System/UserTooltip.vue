@@ -3,7 +3,7 @@
     <template #item>
       <div
         class="flex items-center justify-center bg-neutral-500 w-7 h-7 rounded-full cursor-pointer transition-all"
-      ></div>
+      />
     </template>
     <div class="flex flex-col gap-1 p-1">
       <div

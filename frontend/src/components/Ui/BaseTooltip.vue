@@ -1,9 +1,20 @@
 <template>
-  <div ref="tooltip" tabindex="0" @keydown.esc="showMenu = false" class="relative">
-    <div @click="toggleMenu" class="cursor-pointer">
-      <slot name="item"></slot>
+  <div
+    ref="tooltip"
+    tabindex="0"
+    @keydown.esc="showMenu = false"
+    class="relative"
+  >
+    <div
+      @click="toggleMenu"
+      class="cursor-pointer"
+    >
+      <slot name="item" />
     </div>
-    <transition name="fade" @after-leave="showMenu = false">
+    <transition
+      name="fade"
+      @after-leave="showMenu = false"
+    >
       <div
         v-show="showMenu"
         class="absolute right-0 mt-2 text-sm font-medium bg-neutral-800 border border-neutral-700 rounded-md shadow-lg py-0.5 z-50"
@@ -13,7 +24,7 @@
           [width]: true,
         }"
       >
-        <slot></slot>
+        <slot />
       </div>
     </transition>
   </div>

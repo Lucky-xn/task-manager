@@ -15,17 +15,27 @@
         <span
           class="bg-blue-600 transition-all duration-300 rounded-md px-4 py-1 cursor-pointer"
           @click="modalNewTask = true"
-          >Adicionar Tarefa</span
-        >
+        >Adicionar Tarefa</span>
       </div>
-      <DataTable :columns="columns" :data="''">
+      <DataTable
+        :columns="columns"
+        :data="''"
+      >
         <template #row="{ item }">
-          <td v-for="(value, key) in item" :key="key">{{ value }}</td>
+          <td
+            v-for="(value, key) in item"
+            :key="key"
+          >
+            {{ value }}
+          </td>
         </template>
       </DataTable>
     </SimpleCard>
   </div>
-  <ModalTask :showModal="modalNewTask" @update:closeModal="modalNewTask = false" />
+  <ModalTask
+    :show-modal="modalNewTask"
+    @update:close-modal="modalNewTask = false"
+  />
 </template>
 
 <script setup>

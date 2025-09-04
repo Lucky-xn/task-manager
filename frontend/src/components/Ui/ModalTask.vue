@@ -1,7 +1,10 @@
 <template>
   <transition name="fade">
-    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50">
-      <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div
+      v-if="showModal"
+      class="fixed inset-0 flex items-center justify-center z-50"
+    >
+      <div class="absolute inset-0 bg-black opacity-50" />
       <div
         ref="modal"
         class="relative w-[50rem] z-60 h-35 flex flex-col gap-6 items-center border border-neutral-700 bg-neutral-800 rounded-md p-4"
@@ -13,7 +16,7 @@
           v-model="text"
           class="w-full px-3 py-3 bg-transparent border border-neutral-600 rounded-md outline-none text-white"
           placeholder="Describe your task..."
-        />
+        >
         <Icon
           icon="mdi:close"
           @click="emit('update:closeModal')"

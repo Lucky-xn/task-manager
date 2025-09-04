@@ -7,7 +7,7 @@
     >
       Gerenciador de Tarefas
     </span>
-    <UserTooltip/>
+    <UserTooltip />
   </nav>
 </template>
 
