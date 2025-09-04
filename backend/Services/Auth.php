@@ -25,7 +25,6 @@ class Auth {
       $payload = [
          'iat' => $issuedAt,
          'exp' => $expirationTime,
-         'data' => $userData,
          'first_name' => $userData['first_name'] ?? null,
          'last_name' => $userData['last_name'] ?? null,
          'email' => $userData['email'] ?? null

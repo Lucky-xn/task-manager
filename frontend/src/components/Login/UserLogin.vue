@@ -62,7 +62,7 @@
 import { ref } from 'vue';
 
 import { useRequest } from '@/services/useRequest.js';
-import { saveToken } from '../../services/Auth';
+import { setToken } from '../../services/Auth';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -86,8 +86,7 @@ const login = async () => {
     });
     
     if (dados.value && dados.value.token) {
-      console.log(dados.value.token);
-      saveToken(dados.value.token);
+      setToken(dados.value.token);
       router.push('/home');
     }
   } catch (error) {

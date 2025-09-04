@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { getToken } from './Auth';
+import { getValidToken } from './Auth';
+import { useAuth } from './useAuth';
 
 import { ref } from 'vue';
 
+const { logout } = useAuth();
 
 const api = axios.create({
    baseURL: import.meta.env.VITE_API_URL,
@@ -16,13 +18,23 @@ export { api };
 
 api.interceptors.request.use(
    (config) => {
-      const token = getToken();
+      const token = getValidToken();
       if (token) {
          config.headers['Authorization'] = `Bearer ${token}`;
       }
       return config;
    },
    error => Promise.reject(error),
+)
+
+api.interceptors.response.use(
+   (response) => response,
+   (error) => {
+      if (error.response && error.response?.status === 401) {
+         logout();
+      }
+      return Promise.reject(error);
+   }
 )
 
 export function useRequest(url, method = 'GET') {

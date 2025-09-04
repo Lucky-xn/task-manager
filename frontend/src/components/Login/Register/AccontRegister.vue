@@ -53,15 +53,25 @@
             >Password:</label
           >
           <input
-            type="password"
+            :type="seePassword ? 'text' : 'password'"
             id="password"
             v-model="password"
             placeholder="********"
             required
             class="border border-neutral-700 rounded-md focus:outline-1 focus:outline-blue-500 bg-neutral-800 px-2 py-1"
           />
-          <Icon icon="solar:eye-bold-duotone" class="h-5 w-5 text-white absolute right-2 top-8 transform -translate-y-1/2" />
-          <Icon icon="solar:eye-closed-line-duotone" class="h-5 w-5 text-white absolute right-2 top-8 transform -translate-y-1/2" />
+          <Icon
+            v-if="seePassword"
+            @click="seePassword = false"
+            icon="solar:eye-bold-duotone"
+            class="h-5 w-5 cursor-pointer text-white absolute right-2 top-8 transform -translate-y-1/2"
+          />
+          <Icon
+            v-else
+            @click="seePassword = true"
+            icon="solar:eye-closed-line-duotone"
+            class="h-5 w-5 cursor-pointer text-white absolute right-2 top-8 transform -translate-y-1/2"
+          />
         </div>
         <div class="text-xs flex gap-2 py-0.5">
           <span class="text-gray-500">You have an Account?</span>
@@ -82,10 +92,12 @@
 <script setup>
 import { ref } from "vue";
 
-import { useRequest } from "./../../../services/useRequest.js";
-import { saveToken } from "../../../services/Auth.js";
+import { useRequest } from "@/services/useRequest.js";
+import { setToken } from "@/services/Auth.js";
 
 const { dados, makeRequest } = useRequest("register", "post");
+
+const seePassword = ref(false);
 
 const first_name = ref("");
 const last_name = ref("");
@@ -98,10 +110,7 @@ function emailRegex() {
 }
 
 const createNewUser = async () => {
-  if (!emailRegex()) {
-    console.error("Invalid email format");
-    return;
-  }
+  if (!emailRegex()) return;
 
   await makeRequest({
     type: "register",
@@ -112,6 +121,6 @@ const createNewUser = async () => {
   });
 
   console.log(dados.value.token);
-  saveToken(dados.value.token);
+  setToken(dados.value.token);
 };
 </script>
