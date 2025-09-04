@@ -93,8 +93,9 @@
 import { ref } from "vue";
 
 import { useRequest } from "@/services/useRequest.js";
-import { setToken } from "@/services/Auth.js";
+import { useAuth } from "../../../services/useAuth";
 
+const { setToken } = useAuth();
 const { dados, makeRequest } = useRequest("register", "post");
 
 const seePassword = ref(false);
@@ -111,7 +112,6 @@ function emailRegex() {
 
 const createNewUser = async () => {
   if (!emailRegex()) return;
-
   await makeRequest({
     type: "register",
     first_name: first_name.value,
@@ -120,7 +120,6 @@ const createNewUser = async () => {
     password: password.value,
   });
 
-  console.log(dados.value.token);
   setToken(dados.value.token);
 };
 </script>

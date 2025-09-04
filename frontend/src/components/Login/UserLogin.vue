@@ -62,8 +62,9 @@
 import { ref } from 'vue';
 
 import { useRequest } from '@/services/useRequest.js';
-import { setToken } from '../../services/Auth';
 import { useRouter } from 'vue-router';
+
+import { setToken } from '@/services/useAuth.js';
 
 const router = useRouter();
 

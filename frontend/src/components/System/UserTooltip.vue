@@ -31,11 +31,7 @@
 
 <script setup>
 import UiTooltip from "@/components/ui/UiTooltip.vue";
+import { useAuth } from "@/services/useAuth";
 
-import { removeToken } from "../../services/Auth";
-
-function logout() {
-  removeToken();
-  window.location.reload();
-}
+const { logout } = useAuth();
 </script>

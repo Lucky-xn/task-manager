@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { getValidToken } from './Auth';
-import { useAuth } from './useAuth';
+import { useAuth, getValidToken } from './useAuth';
 
 import { ref } from 'vue';
 
