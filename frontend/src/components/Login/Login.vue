@@ -62,11 +62,15 @@
 import { ref } from 'vue';
 
 import { useRequest } from '@/services/useRequest.js';
+import { saveToken } from '../../services/Auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const email = ref('');
 const password = ref('');
 
-const {dados, makeRequest, loading } = useRequest("user", "post");
+const { dados, makeRequest, loading } = useRequest("user", "post");
 
 function emailRegex() {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -80,8 +84,12 @@ const login = async () => {
       email: email.value,
       password: password.value
     });
-
-    console.log(dados.value.token);
+    
+    if (dados.value && dados.value.token) {
+      console.log(dados.value.token);
+      saveToken(dados.value.token);
+      router.push('/home');
+    }
   } catch (error) {
     console.error(error);
   }

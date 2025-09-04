@@ -4,24 +4,27 @@ import AccontRegister from "../../components/Login/Register/AccontRegister.vue";
 
 export default [
    {
-      path: '/home_page',
+      path: '/Home',
       component: HomePage,
       meta: {
-         type: 'public'
+         type: 'public',
+         require_auth: true,
       }
    },
    {
       path: '/Login',
       component: Login,
       meta: {
-         type: 'system'
+         type: 'system',
+         require_auth: false,
       }
    },
    {
       path: '/register',
       component: AccontRegister,
       meta: {
-         type: 'system'
+         type: 'system',
+         require_auth: false
       }
    }
 ]
