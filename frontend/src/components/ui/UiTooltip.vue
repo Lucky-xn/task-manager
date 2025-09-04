@@ -26,13 +26,13 @@ import { onClickOutside } from "@vueuse/core";
 const showMenu = ref(false);
 const tooltip = ref(null);
 
-onClickOutside(tooltip, (event) => (showMenu.value = false));
+onClickOutside(tooltip, () => (showMenu.value = false));
 
 function toggleMenu() {
   showMenu.value = !showMenu.value;
 }
 
-const props = defineProps({
+defineProps({
   width: {
     type: String,
     default: "w-48",

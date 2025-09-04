@@ -70,7 +70,7 @@ const router = useRouter();
 const email = ref('');
 const password = ref('');
 
-const { dados, makeRequest, loading } = useRequest("user", "post");
+const { dados, makeRequest } = useRequest("user", "post");
 
 function emailRegex() {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

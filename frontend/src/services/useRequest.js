@@ -28,7 +28,6 @@ api.interceptors.request.use(
 export function useRequest(url, method = 'GET') {
    const dados = ref(null)
    const apiUrl = url;
-   const apiMethod = method;
 
    const loading = ref(false);
 

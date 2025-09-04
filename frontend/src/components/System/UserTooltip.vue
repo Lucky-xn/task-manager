@@ -1,5 +1,5 @@
 <template>
-  <Tooltip>
+  <UiTooltip>
     <template #item>
       <div
         class="flex items-center justify-center bg-neutral-500 w-7 h-7 rounded-full cursor-pointer transition-all"
@@ -26,12 +26,11 @@
         <span>Logout</span>
       </div>
     </div>
-  </Tooltip>
+  </UiTooltip>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Tooltip from "@/components/ui/Tooltip.vue";
+import UiTooltip from "@/components/ui/UiTooltip.vue";
 
 import { removeToken } from "../../services/Auth";
 

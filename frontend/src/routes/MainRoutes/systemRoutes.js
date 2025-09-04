@@ -1,5 +1,5 @@
 import HomePage from "../../components/HomePage.vue";
-import Login from "../../components/Login/Login.vue";
+import Login from "../../components/Login/UserLogin.vue";
 import AccontRegister from "../../components/Login/Register/AccontRegister.vue";
 
 export default [
