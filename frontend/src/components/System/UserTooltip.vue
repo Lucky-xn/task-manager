@@ -1,5 +1,5 @@
 <template>
-  <UiTooltip>
+  <BaseTooltip>
     <template #item>
       <div
         class="flex items-center justify-center bg-neutral-500 w-7 h-7 rounded-full cursor-pointer transition-all"
@@ -26,11 +26,11 @@
         <span>Logout</span>
       </div>
     </div>
-  </UiTooltip>
+  </BaseTooltip>
 </template>
 
 <script setup>
-import UiTooltip from "@/components/ui/UiTooltip.vue";
+import BaseTooltip from "@/components/Ui/BaseTooltip.vue";
 import { useAuth } from "@/services/useAuth";
 
 const { logout } = useAuth();

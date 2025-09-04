@@ -5,7 +5,7 @@ namespace App\Models;
 use Config\Db\MysqlModel;
 use Services\Auth;
 
-class User extends MysqlModel
+class UserModel extends MysqlModel
 {
 
    public function createNewUser($data)

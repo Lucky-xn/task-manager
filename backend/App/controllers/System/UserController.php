@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
+use App\Models\UserModel;
 
-$user = new User();
+$user = new UserModel();
 
 $input = json_decode(file_get_contents('php://input'), true);
 

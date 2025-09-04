@@ -1,6 +1,6 @@
-import HomePage from "../../components/HomePage.vue";
-import Login from "../../components/Login/UserLogin.vue";
-import AccontRegister from "../../components/Login/Register/AccontRegister.vue";
+import HomePage from "@/Views/HomePage.vue";
+import Login from "@/Views/Login/UserLogin.vue";
+import AccontRegister from "@/Views/Login/Register/AccontRegister.vue";
 
 export default [
    {

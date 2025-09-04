@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <NavBar v-if="url !== 'system'" />
     <router-view />
   </div>
