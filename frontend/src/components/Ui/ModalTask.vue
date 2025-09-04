@@ -32,7 +32,7 @@ const modal = ref(null);
 const emit = defineEmits(["update:closeModal", "update:value"]);
 const text = ref("");
 
-const props = defineProps({
+defineProps({
   showModal: {
     type: Boolean,
     required: true,

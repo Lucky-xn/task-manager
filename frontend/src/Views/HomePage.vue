@@ -31,13 +31,13 @@
 <script setup>
 import { useAuth } from "../services/useAuth";
 import { onMounted, ref } from "vue";
-import { useRequest } from '@/services/useRequest';
+// import { useRequest } from '@/services/useRequest';
 
 import DataTable from "../Components/Ui/DataTable.vue";
 import SimpleCard from "../Components/Ui/SimpleCard.vue";
 import ModalTask from "../Components/Ui/ModalTask.vue";
 
-const {makeRequest} = useRequest('task');
+// const {makeRequest} = useRequest('task');
 const { user, loadUserFromToken } = useAuth();
 const columns = ["ID", "Task", "Status", "Tags", "Date"];
 
